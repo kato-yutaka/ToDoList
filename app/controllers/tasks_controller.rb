@@ -1,4 +1,4 @@
-class TasksController < ApplicationController
+﻿class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
@@ -6,6 +6,9 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
   end
+
+
+
 
   # GET /tasks/1
   # GET /tasks/1.json
@@ -28,7 +31,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to @task, notice: '作成されました' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -42,7 +45,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to @task, notice: '変更されました' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -56,10 +59,26 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to tasks_url, notice: '削除完了' }
       format.json { head :no_content }
     end
   end
+
+def search
+ @tasks = Task.where("name LIKE '%#{params["search"]["name"]}%'")
+ @search_value = params['search']['name']
+ @search_user  = params['search']['user']
+ @search_category = params['search']['category']
+ @tasks = Task.where("name LIKE '%#{@search_value}%'")
+ if @search_user.present?
+    @tasks = @tasks.where(user_id: @search_user)
+ end
+ if @search_category.present?
+    @tasks = @tasks.where(category_id: @search_category)
+ end
+ render :index
+end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
