@@ -21,8 +21,10 @@
   </div>
   <div class="field">
     <%= f.label :password %><br>
-    <%= f.password_field :password, size: 25,maxlength:15%>
+      <%= password_field :user,:password %>
+   <%= password_field :user,:password_confirmation %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
