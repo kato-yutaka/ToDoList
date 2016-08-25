@@ -15,8 +15,7 @@
   <thead>
     <tr>
       <th>終了</th>
-      <th>予定日</th>
-     
+      <th>予定日</th>  
       <th>予定</th>
       <th>カテゴリー</th>
       <th>ユーザー</th>
@@ -32,9 +31,9 @@
         <td><%= task.name %></td>
         <td><%= task.category.categoryname %></td>
         <td><%= task.user.username %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: '削除しますか?' } %></td>
+        <td><%= link_to '見る', task %></td>
+        <td><%= link_to '編集', edit_task_path(task) %></td>
+        <td><%= link_to '消す', task, method: :delete, data: { confirm: '削除しますか?' } %></td>
       </tr>
     <% end %>
   </tbody>
